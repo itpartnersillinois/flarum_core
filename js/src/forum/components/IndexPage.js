@@ -318,7 +318,7 @@ export default class IndexPage extends Page {
 
     }
     else {
-
+      console.log("test");
 
       items.add('users',
       Button.component({
