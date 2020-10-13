@@ -249,7 +249,8 @@ export default class IndexPage extends Page {
         icon: 'far fa-comments',
         onclick: () => {
           app.cache.viewingUserList = false;
-          app.cache.discussionList.refresh();
+         // this.changeSort(this, Object.keys(app.cache.discussionList.sortMap())[0]);
+         // app.cache.discussionList.refresh();
           m.redraw();
         }
       }),
@@ -284,57 +285,86 @@ export default class IndexPage extends Page {
           const label = sortOptions[value];
           const active = (this.params().sort || Object.keys(sortMap)[0]) === value;
 
+          console.log(this.params().sort);
+
           return Button.component({
             children: label,
             icon: active ? 'fas fa-check' : true,
             onclick: () => {
-              this.changeSort.bind(this, value);
-              app.cache.viewingUserList = false;
+               app.cache.viewingUserList = false;
+
+              this.changeSort(value);
+              m.redraw();
             },
+           // onclick: this.changeSort.bind(this, value),
             active: active,
           })
         }),
       })
     );
 
-    items.add('users',
-    Button.component({
-      children: 'Users',
-      className: 'Button',
-      onclick: () => {
-        // app.cache.discussionList.refresh();
-        // if (app.session.user) {
-        //   app.store.find('users', app.session.user.id());
-        //   m.redraw();
-        // }
+    if (app.cache.viewingUserList) {
+
+        items.add('posts',
+        Button.component({
+          children: 'Posts',
+          className: 'Button',
+          onclick: () => {
+              app.cache.viewingUserList = false;
+              this.changeSort(this, Object.keys(app.cache.discussionList.sortMap())[0]);
+              m.redraw();
+          }
+        }));
+
+    }
+    else {
 
 
-       // this.params.groupNamme = 
-      //  this.params.groupName = "Admin";
-
-      app.cache.viewingUserList = true;
-
-      console.log(app.history.getCurrent().url);
-      const itemNames = [/*'allDiscussions',*/ 'CoMEInBetatestingGroup', 'CoMEInBetaUserGroup', 'UIUCResearchersGroup', 'Mentoring_Group'];
-      const urlNames = [/*'/public/all', */'/public/t/comein-beta-testing-group', '/public/t/comein-beta-user-group', '/public/t/uiuc-researchers-group', '/public/t/mentoring-group'];
-      for (var i = 0; i < urlNames.length; i++) {
-        console.log("Running");
-        if (app.history.getCurrent().url == urlNames[i]) {
-          //console.log(itemNames[i]);
-         // this.params.groupName = itemNames[i];
-          app.cache.groupUserList.refresh(itemNames[i]);
-          break;
+      items.add('users',
+      Button.component({
+        children: 'Members',
+        className: 'Button',
+        onclick: () => {
+          // app.cache.discussionList.refresh();
+          // if (app.session.user) {
+          //   app.store.find('users', app.session.user.id());
+          //   m.redraw();
+          // }
+  
+  
+         // this.params.groupNamme = 
+        //  this.params.groupName = "Admin";
+  
+        console.log(app.cache.viewingUserList);
+        if (app.cache.viewingUserList == undefined || app.cache.viewingUserList == false) {
+          app.cache.viewingUserList = true;
+  
+          console.log(app.history.getCurrent().url);
+          const itemNames = ['allDiscussions', 'CoMEInBetatestingGroup', 'Mentoring_Group_1_Member', 'UIUCResearchersGroup', 'CoMEInFAQ', 'allDiscussions', 'CoEGraduateStudentsGroup'];
+          const urlNames = ['/public/all', '/public/t/comein-beta-testing-group', '/public/t/mentoring-group', '/public/t/uiuc-researchers-group', '/public/t/comein-faq', '/public/t/join-a-forum', '/public/t/coe-graduate-students-group'];
+          for (var i = 0; i < urlNames.length; i++) {
+            console.log("Running");
+            if (app.history.getCurrent().url == urlNames[i]) {
+              //console.log(itemNames[i]);
+             // this.params.groupName = itemNames[i];
+              app.cache.groupUserList.refresh(itemNames[i]);
+              break;
+            }
+          }
+    
+          m.redraw();
         }
-      }
+  
+        
+        }
+      })
+    );
 
-        
-        // app.cache.groupUserList.refresh(itemNames[i]);
-        m.redraw();
-        
-       // m.route(app.route(this.props.routeName, params))
-      }
-    })
-  );
+
+      
+    }
+
+    
 
     return items;
   }
@@ -409,6 +439,7 @@ export default class IndexPage extends Page {
    */
   changeSort(sort) {
     const params = this.params();
+    console.log("Ran");
 
     if (sort === Object.keys(app.cache.discussionList.sortMap())[0]) {
       delete params.sort;
