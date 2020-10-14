@@ -15,9 +15,11 @@
     "moment": "^2.22.2",
     "punycode": "^2.1.1",
     "spin.js": "^3.1.0",
+    "tapable": "^2.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.1.2",
-    "webpack-merge": "^4.1.4"
+    "webpack-merge": "^4.1.4",
+    "webpack-sources": "^2.0.1"
   },
   "scripts": {
     "dev": "webpack --mode development --watch",
