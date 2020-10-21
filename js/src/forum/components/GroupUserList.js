@@ -151,7 +151,7 @@ export default class GroupUserList extends Component {
   }
 
   loadUsers() {
-    console.log(app.store.pushPayload('users'));
+    console.log("TEST: " + app.store.pushPayload('users'));
     
    // app.store.find('users');
   //  console.log("Total Length of users " + app.store.all('users').length);
