@@ -285,7 +285,7 @@ export default class IndexPage extends Page {
           const label = sortOptions[value];
           const active = (this.params().sort || Object.keys(sortMap)[0]) === value;
 
-          console.log(this.params().sort);
+         // console.log(this.params().sort);
 
           return Button.component({
             children: label,
@@ -317,8 +317,7 @@ export default class IndexPage extends Page {
         }));
 
     }
-    else {
-      console.log("test");
+    else if (app.session.user) {
 
       items.add('users',
       Button.component({
@@ -335,17 +334,19 @@ export default class IndexPage extends Page {
          // this.params.groupNamme = 
         //  this.params.groupName = "Admin";
   
-        console.log(app.cache.viewingUserList);
+       // console.log(app.cache.viewingUserList);
         if (app.cache.viewingUserList == undefined || app.cache.viewingUserList == false) {
           app.cache.viewingUserList = true;
   
-          console.log(app.history.getCurrent().url);
-          const itemNames = ['allDiscussions', 'CoMEInBetatestingGroup', 'Mentoring_Group_1_Member', 'UIUCResearchersGroup', 'CoMEInFAQ', 'allDiscussions', 'CoEGraduateStudentsGroup'];
+         // console.log(app.history.getCurrent().url);
+        //  const itemNames = ['allDiscussions', 'CoMEInBetatestingGroup', 'Mentoring_Group_1_Member', 'UIUCResearchersGroup', 'CoMEInFAQ', 'allDiscussions', 'CoEGraduateStudentsGroup'];
+          const itemNames = ['allDiscussions', '11', '7', '6', '12', 'allDiscussions', '13'];
           const urlNames = ['/public/all', '/public/t/comein-beta-testing-group', '/public/t/mentoring-group', '/public/t/uiuc-researchers-group', '/public/t/comein-faq', '/public/t/join-a-forum', '/public/t/coe-graduate-students-group'];
           for (var i = 0; i < urlNames.length; i++) {
-            console.log("Running");
-            if (app.history.getCurrent().url == urlNames[i]) {
-              //console.log(itemNames[i]);
+            //console.log("Running");
+            if (app.history.getCurrent().url.includes(urlNames[i])) {
+           // if (app.history.getCurrent().url == urlNames[i]) {
+             // console.log(itemNames[i]);
              // this.params.groupName = itemNames[i];
               app.cache.groupUserList.refresh(itemNames[i]);
               break;

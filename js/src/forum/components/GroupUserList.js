@@ -42,6 +42,12 @@ export default class GroupUserList extends Component {
     // window.alert(this.props.params.q);
     // window.alert(this.props.params.sort);
     
+    var promise = app.store.find('users');
+    promise.then(function(result) {
+      console.log(result); // "Stuff worked!"
+    }, function(err) {
+      console.log(err); // Error: "It broke"
+    });
   }
 
   view() {
@@ -59,6 +65,7 @@ export default class GroupUserList extends Component {
     }
 
     if (this.users.length === 0 && !this.loading) {
+      console.log("Is not Loading");
       //window.alert("Is not loading");
       const text = app.translator.trans('core.forum.discussion_list.empty_text');
       return (
@@ -139,59 +146,51 @@ export default class GroupUserList extends Component {
     }
 
     this.groupName = newGroupName;
-    // return this.loadResults().then(
-    //   results => {
-    //     this.users = [];
-    //     this.parseResults(results);
-    //   },
-    //   () => {
-    //     this.loading = false;
-    //     m.redraw();
-    //   }
-    // );
 
     this.loadResults();
   }
 
   loadUsers() {
-    // app.store.all('groups').some(group => {
-    //   // if ((group.nameSingular() === this.props.params.groupName)) {
-    //   //   console.log("A  " + this.props.params.groupName);
     
-    //   var updatedGroup = group.nameSingular().replace(/\s+/g, "");
-    // //  console.log(updatedGroup + ", compare to: " + this.groupName);
+   // app.store.find('users');
+  //  console.log("Total Length of users " + app.store.all('users').length);
+   // var x = 0;
 
-    //   if (updatedGroup === this.groupName) {
-    //     console.log("A  " + this.groupName);
+    //app.store.all('users').every(user => {
+    const userList = app.store.all('users');
+   // console.log("Total Length of users " + userList.entries());
+    for (const [index, user] of userList.entries()) {
 
-    //     app.store.all('users').some(user => {
-    //       console.log(user.groups().length);
-    //       var groups = user.groups();
-    //       for (var i = 0; i < groups.length; i++) {
-    //         //console.log("Group: " + groups[i].nameSingular());
-    //         if (groups[i].id() == group.id()) {
-    //             console.log("Added: " + user.user)
-    //             this.users.push(user);
-    //         }
-    //       }
-    //     });
-
-    //   }
-    // });
-
-    console.log("B " + app.store.all('users').length);
-    app.store.all('users').some(user => {
-      console.log(user.username());
+    //  x++;
+      // console.log("___________");
+      // console.log("Username: " + user.username());
+      // console.log("Group IDs:");
       var groups = user.groups();
-      console.log(groups.length);
+     // console.log(groups.length);
+
+     if (this.groupName == "allDiscussions") {
+      // console.log("Viewing users from all discussions");
+       this.users.push(user);
+       continue;
+     }
+
       for (var i = 0; i < groups.length; i++) {
-        console.log(groups[i].nameSingular().replace(/\s+/g, "") + ", compared to: " + this.groupName);
-        if (groups[i].nameSingular().replace(/\s+/g, "") == this.groupName) {
-          console.log("Added");
-          this.users.push(user);
-        }
+       // console.log(groups[i].id());
+        
+         // console.log(groups[i].id());
+         // console.log(groups[i].nameSingular().replace(/\s+/g, "") + ", compared to: " + this.groupName);
+          
+          //if (groups[i].nameSingular().replace(/\s+/g, "") == this.groupName) {
+            if (groups[i].id() == this.groupName) {
+           // console.log("Added");
+            this.users.push(user);
+          }
+        
       }
-    });
+   // });
+    }
+
+   // console.log("Final user count: " + x);
 
 
     this.loading = false;
@@ -207,22 +206,7 @@ export default class GroupUserList extends Component {
    * @return {Promise}
    */
   loadResults(/*offset*/) {
-    // const preloadedDiscussions = app.preloadedApiDocument();
-
-    // if (preloadedDiscussions) {
-    //   window.alert("Did not run as intended");
-    //   return m.deferred().resolve(preloadedDiscussions).promise;
-    // }
-
-
     return this.loadUsers();
-
-  //  const params = this.requestParams();
-  //  params.page = {offset};
-   // params.include = params.include.join(',');
-
-  //  return app.store.find('discussions', params);
-  
   }
 
   /**
@@ -233,8 +217,6 @@ export default class GroupUserList extends Component {
   loadMore() {
     this.loading = true;
 
-    // this.loadResults(this.discussions.length)
-    //   .then(this.parseResults.bind(this));
     this.loadResults();
   }
 
