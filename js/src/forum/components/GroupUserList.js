@@ -42,12 +42,12 @@ export default class GroupUserList extends Component {
     // window.alert(this.props.params.q);
     // window.alert(this.props.params.sort);
     
-    var promise = app.store.find('users');
-    promise.then(function(result) {
-      console.log(result); // "Stuff worked!"
-    }, function(err) {
-      console.log(err); // Error: "It broke"
-    });
+    // var promise = app.store.find('users');
+    // promise.then(function(result) {
+    //   console.log(result); // "Stuff worked!"
+    // }, function(err) {
+    //   console.log(err); // Error: "It broke"
+    // });
   }
 
   view() {
@@ -151,13 +151,14 @@ export default class GroupUserList extends Component {
   }
 
   loadUsers() {
-    console.log("TEST: " + app.
-    store.
-    all('users'));
+    // console.log("TEST: " + app.
+    // store.
+    // all('users'));
 
-    app.
-    store.
-    pushPayload('users')
+    app.store.find('users', {filter: {q: 'group:9'}}).then(users => console.log(users));
+    app.store.find('users', {filter: {q: 'group:CoMEIn Beta testing Group'}}).then(users => console.log(users));
+
+
     
    // app.store.find('users');
   //  console.log("Total Length of users " + app.store.all('users').length);
