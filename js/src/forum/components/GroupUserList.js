@@ -194,18 +194,17 @@ export default class GroupUserList extends Component {
           }
 
           var groups = indiv_user.groups();
-          return groups.includes(_self.groupName);
-            // for (var i = 0; i < groups.length; i++) {
-            //   if (groups[i].id() == _self.groupName) {
-            //     return true;
-            //   }
-            // }
-            // return false;
+            for (var i = 0; i < groups.length; i++) {
+              if (groups[i].id() == _self.groupName) {
+                return true;
+              }
+            }
+            return false;
         });
 
         console.log(list);
         _self.users = list;
-        console.log(_self.list);
+        console.log(_self.users);
 
         _self.loading = false;
         m.lazyRedraw();
