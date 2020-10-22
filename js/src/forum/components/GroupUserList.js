@@ -186,7 +186,7 @@ export default class GroupUserList extends Component {
     app.store.find('users', {
       page: { size: 100 }
     }).then(function(users) {
-        console.log(users.filter(function(indiv_user) {
+        this.users.push(users.filter(function(indiv_user) {
           var groups = indiv_user.groups();
             for (var i = 0; i < groups.length; i++) {
               if (groups[i].id() == 11) {
@@ -199,43 +199,43 @@ export default class GroupUserList extends Component {
 
 
     
-   // app.store.find('users');
-  //  console.log("Total Length of users " + app.store.all('users').length);
-   // var x = 0;
+  //  // app.store.find('users');
+  // //  console.log("Total Length of users " + app.store.all('users').length);
+  //  // var x = 0;
 
-    //app.store.all('users').every(user => {
-    const userList = app.store.all('users');
-   // console.log("Total Length of users " + userList.entries());
-    for (const [index, user] of userList.entries()) {
+  //   //app.store.all('users').every(user => {
+  //   const userList = app.store.all('users');
+  //  // console.log("Total Length of users " + userList.entries());
+  //   for (const [index, user] of userList.entries()) {
 
-    //  x++;
-      // console.log("___________");
-      // console.log("Username: " + user.username());
-      // console.log("Group IDs:");
-      var groups = user.groups();
-     // console.log(groups.length);
+  //   //  x++;
+  //     // console.log("___________");
+  //     // console.log("Username: " + user.username());
+  //     // console.log("Group IDs:");
+  //     var groups = user.groups();
+  //    // console.log(groups.length);
 
-     if (this.groupName == "allDiscussions") {
-      // console.log("Viewing users from all discussions");
-       this.users.push(user);
-       continue;
-     }
+  //    if (this.groupName == "allDiscussions") {
+  //     // console.log("Viewing users from all discussions");
+  //      this.users.push(user);
+  //      continue;
+  //    }
 
-      for (var i = 0; i < groups.length; i++) {
-       // console.log(groups[i].id());
+  //     for (var i = 0; i < groups.length; i++) {
+  //      // console.log(groups[i].id());
         
-         // console.log(groups[i].id());
-         // console.log(groups[i].nameSingular().replace(/\s+/g, "") + ", compared to: " + this.groupName);
+  //        // console.log(groups[i].id());
+  //        // console.log(groups[i].nameSingular().replace(/\s+/g, "") + ", compared to: " + this.groupName);
           
-          //if (groups[i].nameSingular().replace(/\s+/g, "") == this.groupName) {
-            if (groups[i].id() == this.groupName) {
-           // console.log("Added");
-            this.users.push(user);
-          }
+  //         //if (groups[i].nameSingular().replace(/\s+/g, "") == this.groupName) {
+  //           if (groups[i].id() == this.groupName) {
+  //          // console.log("Added");
+  //           this.users.push(user);
+  //         }
         
-      }
-   // });
-    }
+  //     }
+  //  // });
+  //   }
 
    // console.log("Final user count: " + x);
 
