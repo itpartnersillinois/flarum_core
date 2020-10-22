@@ -189,7 +189,7 @@ export default class GroupUserList extends Component {
     app.store.find('users', {
       page: { size: 100 }
     }).then(function(userList) {
-      _self.list.push(userList.filter(function(indiv_user) {
+      _self.users.push(userList.filter(function(indiv_user) {
           var groups = indiv_user.groups();
             for (var i = 0; i < groups.length; i++) {
               if (groups[i].id() == 11) {
@@ -198,11 +198,11 @@ export default class GroupUserList extends Component {
             }
             return false;
         }));
-        console.log(_self.list);
+        //console.log(_self.list);
     });
 
     console.log("test");
-    console.log(list);
+    console.log(users);
 
     
   //  // app.store.find('users');
