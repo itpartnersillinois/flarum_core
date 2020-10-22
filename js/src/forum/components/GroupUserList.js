@@ -202,7 +202,7 @@ export default class GroupUserList extends Component {
     });
 
     console.log("test");
-    console.log(users);
+    console.log(this.users);
 
     
   //  // app.store.find('users');
