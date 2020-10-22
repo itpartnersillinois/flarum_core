@@ -183,13 +183,11 @@ export default class GroupUserList extends Component {
     //   page: { size: 100 }
     // }).then(users => console.log(users));
 
-    var list = [];
-
     var _self = this;
     app.store.find('users', {
       page: { size: 100 }
     }).then(function(userList) {
-      _self.users.push.apply(_self.users, userList.filter(function(indiv_user) {
+      var list = userList.filter(function(indiv_user) {
         console.log(_self.groupName + " compared to " + indiv_user.id());
           if (_self.groupName == "allDiscussions") {
             return true;
@@ -203,7 +201,12 @@ export default class GroupUserList extends Component {
             //   }
             // }
             // return false;
-        }));
+        });
+
+        for (var i = 0; i < list.length; i++) {
+          _self.users.push(list[i]);
+        }
+
         //console.log(_self.list);
     });
 
