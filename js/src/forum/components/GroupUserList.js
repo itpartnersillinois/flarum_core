@@ -185,8 +185,8 @@ export default class GroupUserList extends Component {
 
     app.store.find('users', {
       page: { size: 100 }
-    }).then(function(users) {
-        this.users.push(users.filter(function(indiv_user) {
+    }).then(function(userList) {
+        this.users.push(userList.filter(function(indiv_user) {
           var groups = indiv_user.groups();
             for (var i = 0; i < groups.length; i++) {
               if (groups[i].id() == 11) {
