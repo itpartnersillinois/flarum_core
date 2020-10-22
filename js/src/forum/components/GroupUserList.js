@@ -190,13 +190,18 @@ export default class GroupUserList extends Component {
       page: { size: 100 }
     }).then(function(userList) {
       _self.users.push.apply(_self.users, userList.filter(function(indiv_user) {
+          if (_self.groupName == "allDiscussions") {
+            return true;
+          }
+
           var groups = indiv_user.groups();
-            for (var i = 0; i < groups.length; i++) {
-              if (groups[i].id() == _self.groupName) {
-                return true;
-              }
-            }
-            return false;
+          return groups.includes(_self.groupName);
+            // for (var i = 0; i < groups.length; i++) {
+            //   if (groups[i].id() == _self.groupName) {
+            //     return true;
+            //   }
+            // }
+            // return false;
         }));
         //console.log(_self.list);
     });
