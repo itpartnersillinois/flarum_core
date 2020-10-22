@@ -150,6 +150,16 @@ export default class GroupUserList extends Component {
     this.loadResults();
   }
 
+  filterUsers(indiv_user) {
+    var groups = indiv_user.groups();
+    for (var i = 0; i < groups.length; i++) {
+      if (groups[i].id() == 11) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   loadUsers() {
     // console.log("TEST: " + app.
     // store.
@@ -167,10 +177,26 @@ export default class GroupUserList extends Component {
     //   page: { size: 100 }
     // }).then(users => console.log(users));
 
+    // app.store.find('users', {
+    //   filter: {q: 'username: jonker'},
+    //   page: { size: 100 }
+    // }).then(users => console.log(users));
+
+    // app.store.find('users', {
+    //   filter: {q: 'id:1'},
+    //   page: { size: 100 }
+    // }).then(users => console.log(users));
+
+    // app.store.find('users', {
+    //   filter: {q: 'username: jonker'},
+    //   page: { size: 100 }
+    // }).then(users => console.log(users));
+
     app.store.find('users', {
-      filter: {q: 'id:1'},
       page: { size: 100 }
-    }).then(users => console.log(users));
+    }).then(function(users) {
+        console.log(users.filter(filterUsers));
+    });
 
 
     
