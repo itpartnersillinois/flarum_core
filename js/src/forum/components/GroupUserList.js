@@ -209,6 +209,7 @@ export default class GroupUserList extends Component {
 
     console.log("test");
     console.log(this.users);
+    console.log("Length: " + this.users.length);
 
     
   //  // app.store.find('users');
