@@ -164,6 +164,18 @@ export default class GroupUserList extends Component {
       }
     }}).then(users => console.log(users));
 
+    app.store.find('users', {filter: {
+      user: {
+        'id': 1
+      }
+    }}).then(users => console.log(users));
+
+    app.store.find('users', {filter: {
+      q: {
+        'id': 1
+      }
+    }}).then(users => console.log(users));
+
     
    // app.store.find('users');
   //  console.log("Total Length of users " + app.store.all('users').length);
