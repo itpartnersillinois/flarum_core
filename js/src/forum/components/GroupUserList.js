@@ -192,7 +192,7 @@ export default class GroupUserList extends Component {
       _self.users.push.apply(_self.users, userList.filter(function(indiv_user) {
           var groups = indiv_user.groups();
             for (var i = 0; i < groups.length; i++) {
-              if (groups[i].id() == 11) {
+              if (groups[i].id() == this.groupName) {
                 return true;
               }
             }
