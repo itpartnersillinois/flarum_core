@@ -155,9 +155,14 @@ export default class GroupUserList extends Component {
     // store.
     // all('users'));
 
-    app.store.find('users', {filter: {q: 'group:9'}}).then(users => console.log(users));
-    app.store.find('users', {filter: {q: 'group:CoMEIn Beta testing Group'}}).then(users => console.log(users));
+    // app.store.find('users', {filter: {q: 'group:9'}}).then(users => console.log(users));
+    // app.store.find('users', {filter: {q: 'group:CoMEIn Beta testing Group'}}).then(users => console.log(users));
 
+    app.store.find('users', {filter: {
+      where: {
+        'id': 1
+      }
+    }}).then(users => console.log(users));
 
     
    // app.store.find('users');
