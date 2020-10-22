@@ -187,7 +187,7 @@ export default class GroupUserList extends Component {
     app.store.find('users', {
       page: { size: 100 }
     }).then(function(userList) {
-      var list = userList.filter(function(indiv_user) {
+      _self.users = userList.filter(function(indiv_user) {
        // console.log(_self.groupName + " compared to " + indiv_user.id());
           if (_self.groupName == "allDiscussions") {
             return true;
@@ -202,20 +202,9 @@ export default class GroupUserList extends Component {
             return false;
         });
 
-       // console.log(list);
-        _self.users = list;
-       // console.log(_self.users);
-
         _self.loading = false;
         m.lazyRedraw();
         _self.moreResults = false;
-       // m.redraw();
-
-        // for (var i = 0; i < list.length; i++) {
-        //   _self.users.push(list[i]);
-        // }
-
-        //console.log(_self.list);
     });
 
     // console.log("test");
