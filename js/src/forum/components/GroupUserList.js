@@ -190,6 +190,7 @@ export default class GroupUserList extends Component {
       page: { size: 100 }
     }).then(function(userList) {
       _self.users.push.apply(_self.users, userList.filter(function(indiv_user) {
+        console.log(_self.groupName + " compared to " + indiv_user.id());
           if (_self.groupName == "allDiscussions") {
             return true;
           }
