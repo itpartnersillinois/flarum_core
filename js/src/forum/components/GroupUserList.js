@@ -168,11 +168,7 @@ export default class GroupUserList extends Component {
     // }).then(users => console.log(users));
 
     app.store.find('users', {
-      filter: {
-        where: {
-          'username': 'jonker'
-        }
-      },
+      filter: {q: 'id:1'},
       page: { size: 100 }
     }).then(users => console.log(users));
 
