@@ -205,6 +205,12 @@ export default class GroupUserList extends Component {
 
         console.log(list);
         _self.users = list;
+        console.log(_self.list);
+
+        _self.loading = false;
+        m.lazyRedraw();
+        _self.moreResults = false;
+        m.redraw();
 
         // for (var i = 0; i < list.length; i++) {
         //   _self.users.push(list[i]);
@@ -259,10 +265,11 @@ export default class GroupUserList extends Component {
    // console.log("Final user count: " + x);
 
 
-    this.loading = false;
-    m.lazyRedraw();
-    this.moreResults = false;
-    m.redraw();
+
+  //  this.loading = false;
+  //   m.lazyRedraw();
+  //   this.moreResults = false;
+  //   m.redraw();
   }
 
   /**
