@@ -203,9 +203,12 @@ export default class GroupUserList extends Component {
             // return false;
         });
 
-        for (var i = 0; i < list.length; i++) {
-          _self.users.push(list[i]);
-        }
+        console.log(list);
+        _self.users = list;
+
+        // for (var i = 0; i < list.length; i++) {
+        //   _self.users.push(list[i]);
+        // }
 
         //console.log(_self.list);
     });
